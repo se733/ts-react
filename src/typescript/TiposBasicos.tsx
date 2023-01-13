@@ -14,8 +14,8 @@ export const TiposBasicos = () => {
 
 
   
-  const sumar = ():string => {
-    return "Hola"
+  const sumar = ():number => {
+    return 12+1
   }
 
 
