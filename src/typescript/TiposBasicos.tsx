@@ -10,7 +10,7 @@ export const TiposBasicos = () => {
       edad: 27,
     };
   };
-  console.log(personasListas);
+
 
 
   
