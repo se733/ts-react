@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 
 interface AuthState {
   validando: boolean;
@@ -16,16 +16,44 @@ const initialState: AuthState = {
 
 type AuthAction = { type: "logout" };
 
-// const authReducer = (state: AuthState,action: AuthAction):  AuthState => {
+const authReducer = (state: AuthState, action: AuthAction):  AuthState => {
+    switch (action.type) {
+        case 'logout':
+            return {
+                validando: false,
+                token: null,
+                username: '',
+                nombre: ''
+            }
+            default: return state;
+    
+       
+    }
+};
 
-// };
 
 export const Login = () => {
-//   const [state, dispatch] = useReducer(authReducer, initialState);
+    const [state, dispatch] = useReducer(authReducer, initialState);
+
+    useEffect(() => {
+        setTimeout(() => {
+            dispatch({type: 'logout'})
+        },1500)
+    }, [])
+    
+
+    if(state.validando) {
+        return (
+            <>
+                <h3>Login</h3>
+                <div className="alert alert-info">Validando...</div>
+            </>
+        )
+    }
+
+
   return (
     <>
-      <h1>Login</h1>
-      <div className="alert alert-info">Validando...</div>
       <div className="alert alert-danger">No autenticado...</div>
       <div className="alert alert-success">Autenticado</div>
       <button className="btn btn-primary">Login</button>
