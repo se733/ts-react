@@ -1,18 +1,10 @@
-import { useEffect, useState } from 'react';
-import { reqResApi } from './api/reqRes';
-import { ResListado, Usuario } from './interface/ReqResListado';
+import { Usuario } from './interface/ReqResListado';
+import { useUsuarios } from './hooks/useUsuarios';
 
 export const Usuarios = () => {
 
-    const [usuarios, setUsuarios] = useState<Usuario[]>([])
+   const {usuarios,cargarUsuarios} = useUsuarios()
 
-    useEffect(() => {
-        reqResApi.get<ResListado>('/users')
-        .then(res => {
-            setUsuarios(res.data.data);
-        })
-        .catch(err => console.log(err))
-    }, [])
 
     const renderItem = ({id, email, first_name, last_name, avatar}:Usuario) => {
         return (
@@ -45,6 +37,10 @@ export const Usuarios = () => {
                 }
             </tbody>
         </table>
+
+        <button className='btn btn-primary' onClick={cargarUsuarios}>
+            Siguiente
+        </button>
 
     </>
   )
