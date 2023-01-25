@@ -21,15 +21,28 @@ export const useUsuarios = () => {
 
         if(resp.data.data.length > 0){
             setUsuarios(resp.data.data)
-            ref.current++;
         } else {
+        ref.current--;
             alert('No hay mas registros')
         }
+        
+    }
+    
+    const paginaSiguiente = () => {
+        ref.current++;
+        cargarUsuarios()
+    }
 
+    const paginaAnterior = () => {
+       
+        if(ref.current > 1){
+            ref.current--;
+            cargarUsuarios()
+        } 
     }
 
     return {
-        usuarios, cargarUsuarios
+        usuarios,paginaAnterior, paginaSiguiente
     }
 
 }
